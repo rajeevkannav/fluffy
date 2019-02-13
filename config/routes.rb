@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   namespace :api do
-    # Directs /admin/products/* to Admin::ProductsController
-    # (app/controllers/admin/products_controller.rb)
     resources :todos do
       member do
         patch 'restore'
+      end
+      collection do
+        get 'find_by_tags/:tag' => 'todos#find_by_tags', as: :find_by_tags
       end
     end
   end

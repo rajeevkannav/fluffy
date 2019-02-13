@@ -35,6 +35,11 @@ class Api::TodosController < ApiController
     head :no_content
   end
 
+  # GET /api/todos/find_by_tags/:tag
+  def find_by_tags
+    @todos = Todo.where(tags: {'$in': find_tag_params}).page params[:page]
+  end
+
   private
 
   def todo_params
@@ -49,4 +54,7 @@ class Api::TodosController < ApiController
     @todo = Todo.unscoped.find(params[:id])
   end
 
+  def find_tag_params
+    params[:tags].split(',') rescue []
+  end
 end
