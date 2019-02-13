@@ -4,7 +4,7 @@ class Api::TodosController < ApiController
 
   # GET /api/todos
   def index
-    @todos = Todo.all
+    @todos = Todo.all.page params[:page]
   end
 
   # GET /api/todos/:todo_id

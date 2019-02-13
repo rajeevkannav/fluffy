@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'faker'
+obj_todos = []
+100.times {obj_todos << {title: Faker::Lorem.word}}
+Todo.create(obj_todos)
