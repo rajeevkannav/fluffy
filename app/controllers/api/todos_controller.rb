@@ -1,6 +1,6 @@
 class Api::TodosController < ApiController
 
-  before_action :set_todo, only: [:show, :update, :destroy]
+  before_action :set_todo, only: [:show, :update, :restore, :destroy]
 
   # GET /api/todos
   def index
@@ -25,7 +25,13 @@ class Api::TodosController < ApiController
 
   # DELETE  /api/todos/:todo_id
   def destroy
-    @todo.destroy
+    @todo.update(is_deleted: true) unless @todo.is_deleted
+    head :no_content
+  end
+
+  # PATCH /api/todos/:id/restore
+  def restore
+    @todo.update(is_deleted: false) if @todo.is_deleted
     head :no_content
   end
 

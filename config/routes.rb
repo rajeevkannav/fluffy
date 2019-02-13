@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   namespace :api do
     # Directs /admin/products/* to Admin::ProductsController
     # (app/controllers/admin/products_controller.rb)
-    resources :todos
+    resources :todos do
+      member do
+        patch 'restore'
+      end
+    end
   end
 
   # You can have the root of your site routed with "root"

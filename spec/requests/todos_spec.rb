@@ -103,11 +103,23 @@ RSpec.describe 'Todo API', type: :request do
 
   # Test suite for DELETE /api/todos/:todo_id
 
-  describe 'DELETE /api/todos/;todo_id' do
+  describe 'DELETE /api/todos/:todo_id' do
     before {delete "/api/todos/#{todo_id}"}
 
     it 'return the status code 204' do
       expect(response).to have_http_status(204)
     end
   end
+
+  # Test suite for Restore /api/todos/:todo_id/restore
+
+  describe 'PATCH /api/todos/:todo_id/restore' do
+    before {delete "/api/todos/#{todo_id}"}
+    before {patch "/api/todos/#{todo_id}/restore"}
+
+    it 'return the status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
+
 end
