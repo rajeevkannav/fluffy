@@ -1,7 +1,7 @@
 class Api::TodosController < ApiController
 
-  before_action :set_todo, only: [:show, :update, :restore, :destroy]
-
+  before_action :set_todo, only: [:show, :update, :destroy]
+  before_action :set_deleted_todo, only: [:restore]
   # GET /api/todos
   def index
     @todos = Todo.all.page params[:page]
@@ -25,13 +25,13 @@ class Api::TodosController < ApiController
 
   # DELETE  /api/todos/:todo_id
   def destroy
-    @todo.update(is_deleted: true) unless @todo.is_deleted
+    @todo.update(is_deleted: true)
     head :no_content
   end
 
   # PATCH /api/todos/:id/restore
   def restore
-    @todo.update(is_deleted: false) if @todo.is_deleted
+    @todo.update(is_deleted: false)
     head :no_content
   end
 
@@ -43,6 +43,10 @@ class Api::TodosController < ApiController
 
   def set_todo
     @todo = Todo.find(params[:id])
+  end
+
+  def set_deleted_todo
+    @todo = Todo.unscoped.find(params[:id])
   end
 
 end

@@ -5,13 +5,19 @@ class Todo
   include Mongoid::Timestamps
   include Mongoid::Enum
 
-  enum :status, [:initialized, :started, :finished]
+  ### Constant(s)
+  ALLOWED_STATUSES = [:initialized, :started, :finished]
+
+  enum :status, ALLOWED_STATUSES
 
   ### Collection's field(s)
   field :title, type: String
   field :is_deleted, type: Mongoid::Boolean, default: false
+  field :tags, type: Array
 
   ### Validations
   validates_presence_of :title, :status, :is_deleted
 
+  ### declaring scope assuming deleted todos to be kept hidden by default
+  default_scope -> {where(is_deleted: false)}
 end

@@ -109,6 +109,9 @@ GEM
       tzinfo (>= 0.3.37)
     mongoid-enum (0.4.0)
       mongoid (~> 5.0)
+    mongoid_taggable (1.1.1)
+      mongoid (>= 3)
+      rake
     multi_json (1.13.1)
     nokogiri (1.9.1)
       mini_portile2 (~> 2.4.0)
@@ -224,6 +227,7 @@ DEPENDENCIES
   kaminari-mongoid
   mongoid (= 5.0.2)
   mongoid-enum
+  mongoid_taggable
   oj
   rabl
   rails (= 4.2.7.1)
