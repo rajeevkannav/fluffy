@@ -121,6 +121,8 @@ rails s
        -H 'cache-control: no-cache'
     ```
 
+    To validate further Postman's exported collection is also available into root directory.
+    (fluffy (Todo Application).postman_collection.json).
 ## test
 
 To run tests: 

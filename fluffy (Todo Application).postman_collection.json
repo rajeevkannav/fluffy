@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "a054efc1-3a34-4fcc-a905-b012e715d37d",
+		"name": "fluffy (Todo Application)",
+		"description": "a TODO application backend with Rails 4 and mongodb, only provide RESTful API\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}todos",
+					"host": [
+						"{{base_url}}todos"
+					]
+				},
+				"description": "List All Todos"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Todos Page 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}todos?page=2",
+					"host": [
+						"{{base_url}}todos"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				},
+				"description": "Returns next 20 Todos from page 2"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Todo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"todo\": \n\t{\n\t\t\"title\": \"Learn react\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}todos",
+					"host": [
+						"{{base_url}}todos"
+					]
+				},
+				"description": "Create a Todo"
+			},
+			"response": []
+		},
+		{
+			"name": "Get a todo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}todos/5c65142f8b48f52e1a000002",
+					"host": [
+						"{{base_url}}todos"
+					],
+					"path": [
+						"5c65142f8b48f52e1a000002"
+					]
+				},
+				"description": "Get a todo details"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Todo (title)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"todo\": {\n\t\t\"title\": \"title updated\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/todos/5c65142f8b48f52e1a000002",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"todos",
+						"5c65142f8b48f52e1a000002"
+					]
+				},
+				"description": "Update a Todo (title)"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Todo Status",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"todo\": {\n\t\t\"status\": \"started\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/todos/5c65142f8b48f52e1a000002/update_status",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"todos",
+						"5c65142f8b48f52e1a000002",
+						"update_status"
+					]
+				},
+				"description": "Update a Todo Status"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Todo",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}todos/5c65142f8b48f52e1a000002/restore",
+					"host": [
+						"{{base_url}}todos"
+					],
+					"path": [
+						"5c65142f8b48f52e1a000002",
+						"restore"
+					]
+				},
+				"description": "Delete (soft) a todo item"
+			},
+			"response": []
+		},
+		{
+			"name": "Restore a deleted todo",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}todos/5c65142f8b48f52e1a000002/restore",
+					"host": [
+						"{{base_url}}todos"
+					],
+					"path": [
+						"5c65142f8b48f52e1a000002",
+						"restore"
+					]
+				},
+				"description": "Restore a deleted todo"
+			},
+			"response": []
+		},
+		{
+			"name": "Assign tag(s) to a todo",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"todo\": {\n\t\t\"tags\": [\"high\", \"kannav\"]\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}todos/5c65142f8b48f52e1a000002/assign_tags",
+					"host": [
+						"{{base_url}}todos"
+					],
+					"path": [
+						"5c65142f8b48f52e1a000002",
+						"assign_tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " Find all todo by tag(s)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}todos/find_by_tags/chop,high",
+					"host": [
+						"{{base_url}}todos"
+					],
+					"path": [
+						"find_by_tags",
+						"chop,high"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
