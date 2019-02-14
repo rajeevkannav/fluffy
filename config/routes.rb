@@ -6,9 +6,11 @@ Rails.application.routes.draw do
     resources :todos do
       member do
         patch 'restore'
+        patch 'assign_tags'
+        patch 'update_status'
       end
       collection do
-        get 'find_by_tags/:tag' => 'todos#find_by_tags', as: :find_by_tags
+        get 'find_by_tags/:tags' => 'todos#find_by_tags', as: :find_by_tags
       end
     end
   end

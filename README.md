@@ -29,19 +29,105 @@ rails s
 ## features
 
  - Create todo item
- - (TBD) Mark todo item status as start, finish or not start
+ 
+    ```
+    curl -X POST \
+      http://localhost:3000/api/todos \
+      -H 'Content-Type: application/json' \
+      -H 'cache-control: no-cache' \
+      -d '{
+        "todo": 
+        {
+            "title": "<Todo Title>"
+        }
+    }'
+    ```
+ - Get a todo item
+    ```
+    curl -X GET \
+      http://localhost:3000/api/todos/:todo_id \
+      -H 'cache-control: no-cache'
+    ```   
+ - Mark todo item status as start, finish or not start
+ 
+    ```
+    curl -X PATCH \
+      http://localhost:3000/api//todos/:todo_id/update_status \
+      -H 'Content-Type: application/json' \
+      -H 'cache-control: no-cache' \
+      -d '{
+        "todo": {
+            "status": "<started|finished>"
+        }
+    }'        
+    ```
  - Delete todo item, undo deleted todo item
- - (TBD) Tags can be attached to todo item
+    
+    ```
+    curl -X DELETE \
+     http://localhost:3000/api/todos/:todo_id \
+     -H 'cache-control: no-cache'
+    ``` 
+
+    ```
+    curl -X PATCH \
+      http://localhost:3000/api/todos/:todo_id(deleted)/restore \
+      -H 'cache-control: no-cache'
+      ``` 
+   
+ 
+ - Tags can be attached to todo item
+
+     ```
+     curl -X PATCH \
+       http://localhost:3000/api/todos/:todo_id/assign_tags \
+       -H 'Content-Type: application/json' \
+       -H 'cache-control: no-cache' \
+       -d '{
+        "todo": {
+            "tags": ["tag1", "tag2"]
+        }
+     }'
+    ``` 
  - (TBD) Find all todo items by tag
+ 
+     ```
+     curl -X GET \
+       'http://localhost:3000/api/todos/find_by_tags/<tag1,tag2>' \
+       -H 'Content-Type: application/json' \
+       -H 'cache-control: no-cache'
+    
+    ```
  - Modify todo item
+ 
+     ```
+    curl -X PATCH \
+      http://localhost:3000/api/todos/:todo_id \
+      -H 'Content-Type: application/json' \
+      -H 'Postman-Token: fec854da-379e-455d-90be-e6e69df9a465' \
+      -H 'cache-control: no-cache' \
+      -d '{
+        "todo": {
+            "title": "title updated"
+        }
+    }'
+        ```
+    
  - Pagination of todo item list
+ 
+    ```
+     curl -X GET \
+       'http://localhost:3000/api/todos?page=2' \
+       -H 'cache-control: no-cache'
+    ```
 
 ## test
 
 To run tests: 
-```
-bundle exec rspec
-```
+
+    ```
+    bundle exec rspec
+    ```
 
 ##issues
 

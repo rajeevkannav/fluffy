@@ -1,7 +1,8 @@
 class Api::TodosController < ApiController
 
-  before_action :set_todo, only: [:show, :update, :destroy]
+  before_action :set_todo, except: [:index, :create, :restore, :find_by_tags]
   before_action :set_deleted_todo, only: [:restore]
+
   # GET /api/todos
   def index
     @todos = Todo.all.page params[:page]
@@ -19,8 +20,17 @@ class Api::TodosController < ApiController
 
   # PUT /api/todos/:id
   def update
-    @todo.update(todo_params)
-    head :no_content
+    head :no_content if @todo.update!(todo_params)
+  end
+
+  # PATCH /api/todos/:id/update_status
+  def update_status
+    head :no_content if @todo.update!(todo_status_params)
+  end
+
+  # PATCH /api/todos/:id/assign_tags
+  def assign_tags
+    head :no_content if @todo.update!(todo_tags_params)
   end
 
   # DELETE  /api/todos/:todo_id
@@ -44,6 +54,14 @@ class Api::TodosController < ApiController
 
   def todo_params
     params.require(:todo).permit(:title)
+  end
+
+  def todo_tags_params
+    params.require(:todo).permit(tags: [])
+  end
+
+  def todo_status_params
+    params.require(:todo).permit(:status)
   end
 
   def set_todo

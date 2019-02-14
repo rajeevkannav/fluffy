@@ -98,8 +98,35 @@ RSpec.describe 'Todo API', type: :request do
       end
     end
 
+  end
+
+  # Test suite for PATCH /api/todos/:todo_id/update_status
+
+  describe 'PATCH /api/todos/:todo_id/update_status' do
+    let(:valid_attributes) {{todo: {status: 'started'}}}
+
+    context 'when requested to update with valid status' do
+      before {patch "/api/todos/#{todo_id}/update_status", valid_attributes}
+
+      it 'update the todo' do
+        expect(response.body).to be_empty
+      end
+
+      it 'returns the status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+
+    context 'when requested to update with invalid status' do
+      before {patch "/api/todos/#{todo_id}/update_status", {todo: {status: 'something random'}}}
+
+      it 'returns the status code 422' do
+        expect(response).to have_http_status(422)
+      end
+    end
 
   end
+
 
   # Test suite for DELETE /api/todos/:todo_id
 

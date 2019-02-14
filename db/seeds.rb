@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
 obj_todos = []
-sample_tags = ['high', 'events', 'design', 'marketing']
+sample_tags = ['high', 'events', 'design', 'marketing', 1, 2, 3, 4]
 
-100.times do
+1000.times do
   obj_todos << {
       title: Faker::Lorem.word,
       is_deleted: Faker::Boolean.boolean(0.2),
@@ -17,4 +17,5 @@ sample_tags = ['high', 'events', 'design', 'marketing']
       tags: sample_tags.sample(2)
   }
 end
+
 Todo.create(obj_todos)
