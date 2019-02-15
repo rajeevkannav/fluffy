@@ -206,9 +206,9 @@
 			"response": []
 		},
 		{
-			"name": "Assign tag(s) to a todo",
+			"name": "Assign tag to a todo",
 			"request": {
-				"method": "PATCH",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -219,15 +219,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"todo\": {\n\t\t\"tags\": [\"high\", \"kannav\"]\n\t}\n}"
+					"raw": "{\n\t\"tag\": {\n\t\t\"name\": \"rajssseev\"\n\t}\n}"
 				},
 				"url": {
-					"raw": "{{base_url}}todos/5c65142f8b48f52e1a000002/assign_tags",
+					"raw": "{{base_url}}todos/5c6678738b48f543f800000a/assign_tags",
 					"host": [
 						"{{base_url}}todos"
 					],
 					"path": [
-						"5c65142f8b48f52e1a000002",
+						"5c6678738b48f543f800000a",
 						"assign_tags"
 					]
 				}
@@ -254,13 +254,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{base_url}}todos/find_by_tags/chop,high",
+					"raw": "{{base_url}}tags/rajeev/todos",
 					"host": [
-						"{{base_url}}todos"
+						"{{base_url}}tags"
 					],
 					"path": [
-						"find_by_tags",
-						"chop,high"
+						"rajeev",
+						"todos"
 					]
 				}
 			},
