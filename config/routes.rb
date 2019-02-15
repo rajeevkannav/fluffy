@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :api do
+    get 'tags/todos'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -6,11 +10,13 @@ Rails.application.routes.draw do
     resources :todos do
       member do
         patch 'restore'
-        patch 'assign_tags'
         patch 'update_status'
+        put 'assign_tags'
       end
-      collection do
-        get 'find_by_tags/:tags' => 'todos#find_by_tags', as: :find_by_tags
+    end
+    resources :tags, param: :name, only: [] do
+      member do
+        get 'todos'
       end
     end
   end

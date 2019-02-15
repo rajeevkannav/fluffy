@@ -6,16 +6,24 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
-obj_todos = []
-sample_tags = ['high', 'events', 'design', 'marketing', 1, 2, 3, 4]
+obj_tags = []
+10.times do
+  obj_tags << {name: Faker::Lorem.word}
+end
 
+Tag.create(obj_tags)
+
+obj_todos = []
 1000.times do
   obj_todos << {
       title: Faker::Lorem.word,
       is_deleted: Faker::Boolean.boolean(0.2),
       status: Todo::ALLOWED_STATUSES.sample,
-      tags: sample_tags.sample(2)
   }
 end
 
 Todo.create(obj_todos)
+
+Todo.all.each do |todo|
+  todo.tags = Tag.all.sample(5)
+end

@@ -127,30 +127,18 @@ RSpec.describe 'Todo API', type: :request do
 
   end
 
-  # Test suite for PATCH /api/todos/:todo_id/assign_tags
+  # Test suite for PUT /api/todos/:todo_id/assign_tags
 
-  describe 'PATCH /api/todos/:todo_id/assign_tags' do
+  describe 'PUT /api/todos/:todo_id/assign_tags' do
 
     context 'when requested with single tag' do
-      let(:valid_attributes) {{todo: {tags: ['tag1']}}}
-      before {patch "/api/todos/#{todo_id}/assign_tags", valid_attributes}
+      let(:tag_name) {Faker::Lorem.word}
+      let(:valid_attributes) {{tag: {name: tag_name}}}
+      before {put "/api/todos/#{todo_id}/assign_tags", valid_attributes}
 
-      it 'update the todo' do
+      it 'assign tag to todo' do
         expect(response.body).to be_empty
-      end
-
-      it 'returns the status code 204' do
-        expect(response).to have_http_status(204)
-      end
-    end
-
-
-    context 'when requested with multiple tags' do
-      let(:valid_attributes) {{todo: {tags: ['tag1', 'tag2']}}}
-      before {patch "/api/todos/#{todo_id}/assign_tags", valid_attributes}
-
-      it 'update the todo' do
-        expect(response.body).to be_empty
+        expect(Todo.find(todo_id).tags.last.name).to eq(tag_name)
       end
 
       it 'returns the status code 204' do
@@ -162,24 +150,24 @@ RSpec.describe 'Todo API', type: :request do
 
   # Test suite for GET /api/todos/find_by_tags/:tags
 
-  describe 'GET /api/todos/find_by_tags/:tags' do
-
-    context 'when requested with single tag' do
-      let(:tags) {['tag1', 'tag2']}
-      let(:valid_attributes) {{todo: {tags: tags}}}
-      before {patch "/api/todos/#{todo_id}/assign_tags", valid_attributes}
-      before {get "/api/todos/find_by_tags/#{tags.sample}"}
-
-      it 'find the todo(s) with requested tag' do
-        expect(json).not_to be_empty
-      end
-
-      it 'returns the status code 200' do
-        expect(response).to have_http_status(200)
-      end
-    end
-
-  end
+  # describe 'GET /api/todos/find_by_tags/:tags' do
+  #
+  #   context 'when requested with single tag' do
+  #     let(:tags) {['tag1', 'tag2']}
+  #     let(:valid_attributes) {{todo: {tags: tags}}}
+  #     before {patch "/api/todos/#{todo_id}/assign_tags", valid_attributes}
+  #     before {get "/api/todos/find_by_tags/#{tags.sample}"}
+  #
+  #     it 'find the todo(s) with requested tag' do
+  #       expect(json).not_to be_empty
+  #     end
+  #
+  #     it 'returns the status code 200' do
+  #       expect(response).to have_http_status(200)
+  #     end
+  #   end
+  #
+  # end
 
 
   # Test suite for DELETE /api/todos/:todo_id

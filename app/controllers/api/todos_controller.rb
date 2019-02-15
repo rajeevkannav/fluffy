@@ -1,6 +1,7 @@
 class Api::TodosController < ApiController
 
-  before_action :set_todo, except: [:index, :create, :restore, :find_by_tags]
+  ### Callbacks
+  before_action :set_todo, except: [:index, :create, :restore]
   before_action :set_deleted_todo, only: [:restore]
 
   # GET /api/todos
@@ -30,7 +31,7 @@ class Api::TodosController < ApiController
 
   # PATCH /api/todos/:id/assign_tags
   def assign_tags
-    head :no_content if @todo.update!(todo_tags_params)
+    head :no_content if @todo.tags.find_or_create_by(tags_params)
   end
 
   # DELETE  /api/todos/:todo_id
@@ -45,19 +46,14 @@ class Api::TodosController < ApiController
     head :no_content
   end
 
-  # GET /api/todos/find_by_tags/:tag
-  def find_by_tags
-    @todos = Todo.where(tags: {'$in': find_tag_params}).page params[:page]
-  end
-
   private
 
   def todo_params
     params.require(:todo).permit(:title)
   end
 
-  def todo_tags_params
-    params.require(:todo).permit(tags: [])
+  def tags_params
+    params.require(:tag).permit(:name)
   end
 
   def todo_status_params

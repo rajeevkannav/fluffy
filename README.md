@@ -79,25 +79,25 @@ rails s
  - Tags can be attached to todo item
 
      ```
-     curl -X PATCH \
-       http://localhost:3000/api/todos/:todo_id/assign_tags \
-       -H 'Content-Type: application/json' \
-       -H 'cache-control: no-cache' \
-       -d '{
-        "todo": {
-            "tags": ["tag1", "tag2"]
-        }
-     }'
+        curl -X PATCH \
+          http://localhost:3000/api/todos/:todo_id/assign_tags \
+          -H 'Content-Type: application/json' \
+          -H 'cache-control: no-cache' \
+          -d '{
+            "tag": {
+                "name": "<TagName>"
+            }
+        }'
     ``` 
- - (TBD) Find all todo items by tag
+ - Find all todo items by tag
  
      ```
-     curl -X GET \
-       'http://localhost:3000/api/todos/find_by_tags/<tag1,tag2>' \
-       -H 'Content-Type: application/json' \
-       -H 'cache-control: no-cache'
-    
+        curl -X GET \
+          http://localhost:3000/api/tags/:tag_name/todos \
+          -H 'Content-Type: application/json' \
+          -H 'cache-control: no-cache'    
     ```
+    
  - Modify todo item
  
      ```
