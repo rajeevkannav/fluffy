@@ -58,3 +58,4 @@ end
 
 gem 'kaminari'
 gem 'kaminari-mongoid'
+gem 'rack-cors', require: 'rack/cors'

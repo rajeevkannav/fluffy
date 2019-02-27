@@ -6,7 +6,11 @@ class Api::TodosController < ApiController
 
   # GET /api/todos
   def index
-    @todos = Todo.all.page params[:page]
+    @todos = if (params[:archived] == "true")
+               Todo.unscoped.all.where(is_deleted: true).page params[:page]
+             else
+               Todo.all.page params[:page]
+             end
   end
 
   # GET /api/todos/:todo_id
@@ -31,7 +35,7 @@ class Api::TodosController < ApiController
 
   # PATCH /api/todos/:id/assign_tags
   def assign_tags
-    head :no_content if @todo.tags.find_or_create_by(tags_params)
+    head :no_content if @todo.tags << Tag.find_or_create_by(tags_params)
   end
 
   # DELETE  /api/todos/:todo_id
@@ -57,7 +61,7 @@ class Api::TodosController < ApiController
   end
 
   def todo_status_params
-    params.require(:todo).permit(:status)
+    params.permit(:status)
   end
 
   def set_todo

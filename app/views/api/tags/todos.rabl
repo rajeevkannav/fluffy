@@ -1,2 +1,6 @@
-collection @todos, :root => "todos", :object_root => false
-attributes :title, :status
+object false
+collection @todos
+attributes :id, :title, :status
+child :tags, :object_root => false do
+  attributes :name
+end
