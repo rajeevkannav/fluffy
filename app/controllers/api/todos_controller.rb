@@ -25,12 +25,12 @@ class Api::TodosController < ApiController
 
   # PUT /api/todos/:id
   def update
-    head :no_content if @todo.update!(todo_params)
+    @todo.update!(todo_params)
   end
 
   # PATCH /api/todos/:id/update_status
   def update_status
-    head :no_content if @todo.update!(todo_status_params)
+    @todo.update!(todo_status_params)
   end
 
   # PATCH /api/todos/:id/assign_tags
