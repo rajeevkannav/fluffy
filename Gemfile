@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+ruby '2.2.2'
 gem 'rails', '4.2.7.1'
 #MongoDB ORM Wrapper
 gem 'mongoid', '5.0.2'
@@ -59,3 +60,8 @@ end
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'rack-cors', require: 'rack/cors'
+
+
+group :production do
+  gem 'pg'
+end
