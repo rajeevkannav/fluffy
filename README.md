@@ -79,7 +79,7 @@ rails s
  - Tags can be attached to todo item
 
      ```
-        curl -X PATCH \
+        curl -X PUT \
           http://localhost:3000/api/todos/:todo_id/assign_tags \
           -H 'Content-Type: application/json' \
           -H 'cache-control: no-cache' \

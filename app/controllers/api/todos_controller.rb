@@ -35,7 +35,7 @@ class Api::TodosController < ApiController
 
   # PATCH /api/todos/:id/assign_tags
   def assign_tags
-    head :no_content if @todo.tags << Tag.find_or_create_by(tags_params)
+    render 'show', status: :ok if @todo.tags << Tag.find_or_create_by(tags_params)
   end
 
   # DELETE  /api/todos/:todo_id
